@@ -68,6 +68,9 @@ def simple_enroll(
 
     data = req.data
 
+    # strip newlines
+    data = data.replace(b'\n', b'')
+
     return data
 
 def _cacerts_url() -> str:
