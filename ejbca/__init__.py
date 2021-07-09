@@ -103,6 +103,8 @@ from .rest import getcert, getcertstatus, add_end_entity, delete_end_entity, enr
 
 from .est import simple_enroll, ca_certs
 
+from .ocsp import getocspstatus
+
 __all__ = [
     'Creds',
     'Server',
@@ -115,5 +117,6 @@ __all__ = [
     'enroll_keystore',
     'simple_enroll',
     'ca_certs',
+    'getocspstatus',
 ]
 
