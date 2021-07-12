@@ -15,7 +15,7 @@ class Creds:
 
     def __checkfile(path: bytes) -> None:
         if not os.path.exists(path):
-            raise FileNotFoundError
+            raise FileNotFoundError('File not found', path)
 
     def __init__(
             self,

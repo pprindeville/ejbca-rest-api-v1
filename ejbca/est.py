@@ -64,7 +64,7 @@ def simple_enroll(
     if req.status != 200:
         if not ejbca.tracing:
             helpers.dump(req)
-        raise RuntimeError
+        raise RuntimeError('Enrollment (EST) failure')
 
     data = req.data
 
@@ -111,7 +111,7 @@ def ca_certs(creds: ejbca.Creds) -> bytes:
     if req.status != 200:
         if not ejbca.tracing:
             helpers.dump(req)
-        raise RuntimeError
+        raise RuntimeError('CA certificate fetch failure')
 
     data = req.data
 

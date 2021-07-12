@@ -64,14 +64,14 @@ def getocspstatus(cert: x509.Certificate, issuer: x509.Certificate) -> ocsp.OCSP
     if req.status != 200:
         if not ejbca.tracing:
             helpers.dump(req)
-        raise RuntimeError
+        raise RuntimeError('Failure getting certificate status (OCSP)')
 
     der = req.data
     ocsp_resp = ocsp.load_der_ocsp_response(der)
 
     if ocsp_resp.response_status != ocsp.OCSPResponseStatus.SUCCESSFUL:
         helpers.dump(req)
-        raise RuntimeError
+        raise RuntimeError('Unsuccessful OCSP query')
 
     return ocsp_resp.certificate_status
 

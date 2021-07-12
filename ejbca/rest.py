@@ -54,7 +54,7 @@ def getcert(
     if req.status != 200:
         if not ejbca.tracing:
             helpers.dump(req)
-        raise RuntimeError
+        raise RuntimeError('Failure to fetch certificate (REST)')
 
     data = req.data
 
@@ -97,7 +97,7 @@ def getcertstatus(
     if req.status != 200:
         if not ejbca.tracing:
             helpers.dump(req)
-        raise RuntimeError
+        raise RuntimeError('Failure to get certificate status (REST)')
 
     data = req.data
     resp = json.loads(data)
@@ -199,7 +199,7 @@ def add_end_entity(
     if req.status != 200:
         if not ejbca.tracing:
             helpers.dump(req)
-        raise RuntimeError
+        raise RuntimeError('Failure to add end-entity (REST)')
 
     data = req.data
 
@@ -236,7 +236,7 @@ def delete_end_entity(
     if req.status != 200:
         if not ejbca.tracing:
             helpers.dump(req)
-        raise RuntimeError
+        raise RuntimeError('Failure to delete end-entity (REST)')
 
 def _enroll_keystore_url() -> str:
     return 'https://' + ejbca.server.name + '/ejbca/ejbca-rest-api/v1/certificate/enrollkeystore'
@@ -293,7 +293,7 @@ def enroll_keystore(
     if req.status != 201:
         if not ejbca.tracing:
             helpers.dump(req)
-        raise RuntimeError
+        raise RuntimeError('Failure to enroll keystore (REST)')
 
     data = req.data
 
@@ -306,3 +306,4 @@ def enroll_keystore(
     format = resp['response_format'].encode()
 
     return format, certificate
+
