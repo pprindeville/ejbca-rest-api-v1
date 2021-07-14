@@ -105,6 +105,8 @@ from .est import simple_enroll, ca_certs
 
 from .ocsp import getocspstatus
 
+from .certstore import search_subject
+
 __all__ = [
     'Creds',
     'Server',
@@ -118,5 +120,6 @@ __all__ = [
     'simple_enroll',
     'ca_certs',
     'getocspstatus',
+    'search_subject',
 ]
 
