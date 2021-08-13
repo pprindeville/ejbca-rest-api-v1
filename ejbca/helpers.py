@@ -23,8 +23,8 @@ def eprint(*args, **kwargs) -> None:
 
 def dump(req: urllib3.response.HTTPResponse) -> None:
     eprint('{0:d} {1:s}\n'.format(req.status, req.reason))
-    for hdr in req.headers:
-        eprint('{0:s}: {1:s}'.format(hdr, req.headers[hdr]))
+    ##for hdr in req.headers:
+    ##    eprint('{0:s}: {1:s}'.format(hdr, req.headers[hdr]))
     eprint(req.data.decode())
 
 def parse_ts(timestamp: str) -> datetime.datetime:
