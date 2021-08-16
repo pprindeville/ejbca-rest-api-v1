@@ -34,7 +34,8 @@ def simple_enroll(
     http = urllib3.PoolManager(
         cert_reqs = "CERT_REQUIRED" if creds.secure else "CERT_NONE",
         ca_certs = creds.bundle,
-        # client side creds are ignored
+        cert_file = creds.cert,
+        key_file = creds.key,
     )
 
     headers = {
@@ -83,7 +84,8 @@ def ca_certs(creds: ejbca.Creds) -> bytes:
     http = urllib3.PoolManager(
         cert_reqs = "CERT_REQUIRED" if creds.secure else "CERT_NONE",
         ca_certs = creds.bundle,
-        # client side creds are ignored
+        cert_file = creds.cert,
+        key_file = creds.key,
     )
 
     headers = {
