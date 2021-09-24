@@ -23,6 +23,9 @@ def _simpleenroll_url() -> str:
 def simple_enroll(
         csr: bytes,
         creds: ejbca.Creds,
+        client_mode: Optional[bool] = False,
+        username: Optional[bytes] = None,
+        password: Optional[bytes] = None,
         url: Optional[bytes] = None,
     ) -> bytes:
 
@@ -30,6 +33,9 @@ def simple_enroll(
         url = _simpleenroll_url()
     else:
         url = url.decode()
+
+    if not client_mode and (username is None or password is None):
+        raise ValueError('RA mode requires username and password')
 
     http = urllib3.PoolManager(
         cert_reqs = "CERT_REQUIRED" if creds.secure else "CERT_NONE",
@@ -43,6 +49,10 @@ def simple_enroll(
         'Content-Type': 'application/pkcs10',
         'Content-Transfer-Encoding': 'base64',
     }
+
+    if not client_mode:
+        token = base64.b64encode(username + b':' + password)
+        headers['Authorization'] = 'Basic ' + token.decode()
 
     if ejbca.tracing:
         eprint('POST {0:s}'.format(helpers.localurl(url)))
